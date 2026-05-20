@@ -1,276 +1,112 @@
-# 🤖 AI News Agent
-
+📄 DocAI Agent 🐍
 <div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge\&logo=python)
-![Flask](https://img.shields.io/badge/Flask-Web_App-black?style=for-the-badge\&logo=flask)
-![LangChain](https://img.shields.io/badge/LangChain-AI_Framework-green?style=for-the-badge)
-![Groq](https://img.shields.io/badge/Groq-LLM_API-orange?style=for-the-badge)
-![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-Web_Scraping-yellow?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-red?style=for-the-badge)
 
-### 🧠 AI-Powered Technology News Summarizer
 
-An intelligent automated system that fetches, analyzes, and summarizes the latest AI and technology news using modern Large Language Models (LLMs).
+
+
+
+
+
+
+
+
+
+🧠 AI-Powered Document Question Answering System
+
+An intelligent system that allows users to upload documents and ask questions to extract accurate answers instantly using LLMs.
+
+🚀 Developed by: Ahmed Nazzal
+🌐 Live Demo: https://your-project-link.com
+📦 GitHub: https://github.com/your-username/docai-agent
 
 </div>
+📌 Overview
 
----
+DocAI Agent is an AI-powered system that reads documents (PDF/TXT), processes them, and answers user questions using semantic search + LLM reasoning.
 
-# 📌 Overview
+It combines:
 
-**AI News Agent** is a Python-based AI application designed to collect the latest technology and artificial intelligence news from multiple sources, process the content, and generate concise, structured summaries automatically.
-
-The project combines:
-
-* Web scraping
-* Natural Language Processing (NLP)
-* AI summarization
-* Flask web development
-
-to deliver a modern AI-powered news experience.
-
----
-
-# ✨ Features
-
-## 📰 Automated News Scraping
-
-* Fetches the latest tech news automatically
-* Supports multiple news sources
-* Extracts titles, descriptions, images, and links
-
-## 🧠 AI Summarization
-
-* Generates AI-powered summaries using LLMs
-* Extracts key insights from articles
-* Produces clean and readable summaries
-
-## 🌐 Flask Web Interface
-
-* Responsive and lightweight UI
-* Built using Flask Templates
-* Organized article cards and summaries
-
-## ⚡ Python Backend Features
-
-* REST-friendly structure
-* Modular Python architecture
-* Easy integration with APIs
-* Environment variable support
-
----
-
-# 🛠️ Python Libraries Used
-
-| Library          | Purpose                   |
-| ---------------- | ------------------------- |
-| `Flask`          | Web framework             |
-| `requests`       | HTTP requests             |
-| `beautifulsoup4` | HTML parsing & scraping   |
-| `langchain`      | AI workflow orchestration |
-| `python-dotenv`  | Environment variables     |
-| `groq`           | LLM API integration       |
-
----
-
-# 📦 Requirements
-
-```txt id="nqg0gn"
-Flask
-requests
-beautifulsoup4
-langchain
-python-dotenv
-groq
-```
-
-Install manually:
-
-```bash id="k3vkza"
-pip install Flask requests beautifulsoup4 langchain python-dotenv groq
-```
-
----
-
-# 📂 Project Structure
-
-```bash id="m90njm"
-ai-news-agent/
+📄 Document processing
+🧠 Vector embeddings
+⚡ Groq LLM inference
+🎨 Streamlit Dark UI
+✨ Features
+⚡ Fast AI Responses
+Powered by Groq API for ultra-low latency inference
+🧠 Smart Context Understanding
+Uses embeddings + semantic search
+Retrieves most relevant chunks only
+📄 Document Support
+PDF files
+TXT files
+🎨 Modern UI
+Dark-themed Streamlit interface
+Clean developer experience
+🔍 Transparent Processing
+Shows document chunking
+Shows retrieval process
+🛠️ Tech Stack
+Tool	Purpose
+Python	Core language
+Streamlit	UI framework
+LangChain	AI orchestration
+Groq API	LLM inference
+FAISS / ChromaDB	Vector database
+📁 Project Structure
+docai-agent/
 │
 ├── app.py
 ├── requirements.txt
 ├── .env
 │
-├── scraper/
-│   ├── news_scraper.py
-│   ├── parser.py
-│   └── sources.py
+├── chains/
+│   ├── qa_chain.py
 │
-├── summarizer/
-│   ├── ai_summary.py
-│   ├── prompts.py
-│   └── llm.py
+├── utils/
+│   ├── loader.py
+│   ├── splitter.py
 │
-├── templates/
-│   ├── index.html
-│   └── article.html
+├── embeddings/
+│   ├── vector_store.py
 │
-├── static/
-│   ├── css/
-│   ├── js/
-│   └── images/
+├── data/
+│   ├── sample.pdf
 │
 └── README.md
-```
-
----
-
-# ⚙️ Installation & Setup
-
-## 1️⃣ Clone the Repository
-
-```bash id="pqj19u"
-git clone https://github.com/ahmadnazzal22/ai-news-agent.git
-
-cd ai-news-agent
-```
-
----
-
-## 2️⃣ Create Virtual Environment
-
-```bash id="jlwm94"
+⚙️ Installation & Setup
+1️⃣ Clone Repository
+git clone https://github.com/your-username/docai-agent.git
+cd docai-agent
+2️⃣ Create Virtual Environment
 python -m venv venv
-```
-
----
-
-## 3️⃣ Activate Environment
-
-### Windows
-
-```bash id="f7g0pk"
+3️⃣ Activate Environment
+Windows
 venv\Scripts\activate
-```
-
-### macOS / Linux
-
-```bash id="5gwxzw"
+Linux / Mac
 source venv/bin/activate
-```
-
----
-
-## 4️⃣ Install Dependencies
-
-```bash id="m0y8gw"
+4️⃣ Install Dependencies
 pip install -r requirements.txt
-```
-
----
-
-## 5️⃣ Configure Environment Variables
-
-Create a `.env` file:
-
-```env id="txmb4n"
-GROQ_API_KEY=your_api_key
-```
-
----
-
-## 6️⃣ Run the Flask Application
-
-```bash id="oklmwm"
-python app.py
-```
-
-Visit:
-
-```bash id="8dztw7"
-http://127.0.0.1:5000
-```
-
----
-
-# 🧠 Example Python Code
-
-## Fetch News Articles
-
-```python id="jlwmg8"
-import requests
-from bs4 import BeautifulSoup
-
-url = "https://example.com"
-
-response = requests.get(url)
-
-soup = BeautifulSoup(response.text, "html.parser")
-
-titles = soup.find_all("h2")
-
-for title in titles:
-    print(title.text)
-```
-
----
-
-## AI Summarization Example
-
-```python id="h6nrqw"
-from groq import Groq
-
-client = Groq(api_key="YOUR_API_KEY")
-
-response = client.chat.completions.create(
-    model="llama3-70b-8192",
-    messages=[
-        {
-            "role": "user",
-            "content": "Summarize this article"
-        }
-    ]
-)
-
-print(response.choices[0].message.content)
-```
-
----
-
-# 🧠 How It Works
-
-```mermaid id="zhp7c7"
-graph TD
-
-A[Scrape News Websites] --> B[Extract Article Content]
-B --> C[Process Text with Python]
-C --> D[Send to AI Model]
-D --> E[Generate Smart Summary]
-E --> F[Display in Flask UI]
-```
-
----
-
-# 🚀 Future Improvements
-
-* ✅ AI sentiment analysis
-* ✅ News categorization
-* ✅ Real-time updates
-* ✅ User authentication
-* ✅ Bookmark articles
-* ✅ Dark mode
-* ✅ REST API support
-* ✅ PostgreSQL database integration
-* ✅ Docker deployment
-
----
-
-# 🐳 Docker Support
-
-## Dockerfile
-
-```dockerfile id="zswfkk"
+5️⃣ Configure API Key
+GROQ_API_KEY=your_api_key_here
+6️⃣ Run Application
+streamlit run app.py
+🧠 AI Pipeline Flow
+🧪 Example Usage
+Upload Document
+PDF or TXT file
+Ask Question
+What is the main topic of this document?
+AI Response
+The document discusses artificial intelligence and its applications in modern systems...
+🚀 Future Improvements
+📚 Multi-document chat
+💬 Chat history memory
+🔐 User authentication
+🌍 Multi-language support
+📊 Analytics dashboard
+☁️ Cloud deployment
+🐳 Docker Support
 FROM python:3.11
 
 WORKDIR /app
@@ -279,67 +115,32 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-CMD ["python", "app.py"]
-```
-
----
-
-# ☁️ Deployment
-
-## Deploy on Render / Railway / VPS
-
-### Run with Gunicorn
-
-```bash id="l14lxg"
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+☁️ Deployment
+Run with production server
 pip install gunicorn
 
-gunicorn app:app
-```
+(Streamlit deploy via cloud platforms like Render / Streamlit Cloud)
 
----
-
-# 🤝 Contributing
-
-Contributions are welcome!
-
-```bash id="xxa3ie"
-Fork → Clone → Create Branch → Commit → Pull Request
-```
-
----
-
-# 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-# 👨‍💻 Developer
-
+🤝 Contributing
+Fork → Clone → Create Branch → Commit → PR
+👨‍💻 Developer
 <div align="center">
-
-## Ahmad Nazzal
+Ahmed Nazzal
 
 🐍 Python Developer
-🧠 AI Enthusiast
-⚡ Backend Engineer
+🧠 AI Engineer
+⚡ LLM Systems Builder
 
 </div>
-
----
-
-# ⭐ Support
+⭐ Support
 
 If you like this project:
 
-🌟 Star the repository
-🍴 Fork the project
-📢 Share it with others
-
----
+⭐ Star the repo
+🍴 Fork it
+📢 Share it
 
 <div align="center">
-
-### Built with Python, Flask & AI ❤️
-
+Built with Python 🐍 + LangChain 🧠 + Groq ⚡
 </div>
