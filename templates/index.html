@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI News Agent</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: #0b0b0d; color: #e3e3e3; height: 100vh; display: flex; flex-direction: column; }
+        #header { padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        #header h1 { font-size: 18px; font-weight: 600; background: linear-gradient(135deg, #4285f4, #9b51e0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header-btns { display: flex; gap: 10px; }
+        .header-btn { background: rgba(255,255,255,0.05); border: none; color: #aaa; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
+        .header-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        #main { display: flex; flex: 1; overflow: hidden; }
+        #news-panel { width: 320px; border-right: 1px solid rgba(255,255,255,0.05); overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+        #news-panel h2 { font-size: 13px; color: #666; text-transform: uppercase; margin-bottom: 6px; }
+        .news-card { background: #1a1a1d; border-radius: 10px; padding: 12px; cursor: pointer; transition: all 0.2s; border: 1px solid transparent; }
+        .news-card:hover { border-color: rgba(66,133,244,0.3); background: #1e1e22; }
+        .news-card .category { font-size: 10px; padding: 2px 8px; border-radius: 20px; margin-bottom: 6px; display: inline-block; }
+        .cat-AI { background: rgba(66,133,244,0.2); color: #4285f4; }
+        .cat-Security { background: rgba(234,67,53,0.2); color: #ea4335; }
+        .cat-Startup { background: rgba(52,168,83,0.2); color: #34a853; }
+        .cat-Other { background: rgba(255,255,255,0.1); color: #aaa; }
+        .news-card .title { font-size: 13px; color: #e3e3e3; margin-bottom: 4px; line-height: 1.4; }
+        .news-card .translation { font-size: 12px; color: #888; direction: rtl; }
+        .news-card .meta { font-size: 11px; color: #555; margin-top: 6px; }
+        .importance-High { color: #ea4335; }
+        .importance-Medium { color: #fbbc04; }
+        .importance-Low { color: #666; }
+        #chat-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        #chat-box { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 24px; scrollbar-width: none; }
+        .message { display: flex; gap: 14px; align-items: flex-start; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        .msg-avatar { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+        .message.bot .msg-avatar { background: linear-gradient(135deg, #1a73e8, #8ab4f8); color: white; }
+        .message.user .msg-avatar { background: #2b5a9e; color: white; font-weight: bold; }
+        .msg-content { font-size: 14px; line-height: 1.7; color: #e3e3e3; }
+        .msg-content pre { background: #161920; padding: 14px; border-radius: 10px; overflow-x: auto; margin: 10px 0; }
+        .msg-content code { font-size: 13px; }
+        .typing-dots { display: flex; gap: 5px; padding: 6px 0; }
+        .typing-dots span { width: 6px; height: 6px; background: #666; border-radius: 50%; animation: bounce 1.2s infinite ease-in-out both; }
+        .typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes bounce { 0%,80%,100% { transform: scale(0.6); opacity: 0.4; } 40% { transform: scale(1.1); opacity: 1; } }
+        #input-area { padding: 16px 24px 24px; }
+        #input-wrapper { display: flex; gap: 12px; align-items: center; background: #1e1f20; border-radius: 24px; padding: 10px 20px; border: 1px solid rgba(255,255,255,0.05); }
+        #input-wrapper:focus-within { background: #282a2c; }
+        #user-input { flex: 1; background: transparent; border: none; color: #e3e3e3; font-size: 15px; outline: none; resize: none; max-height: 120px; line-height: 1.5; }
+        #user-input::placeholder { color: #555; }
+        #send-btn { background: transparent; border: none; color: #555; width: 34px; height: 34px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: color 0.2s; }
+        #send-btn:hover:not(:disabled) { color: #4285f4; }
+        #send-btn:disabled { color: #333; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+<div id="header">
+    <h1>⚡ AI News Agent</h1>
+    <div class="header-btns">
+        <button class="header-btn" onclick="refreshNews()"><i class="fa-solid fa-rotate"></i> Refresh News</button>
+        <button class="header-btn" onclick="clearChat()"><i class="fa-solid fa-arrow-rotate-left"></i> Clear Chat</button>
+    </div>
+</div>
+<div id="main">
+    <div id="news-panel">
+        <h2>📰 Latest News</h2>
+        <div id="news-list">Loading...</div>
+    </div>
+    <div id="chat-panel">
+        <div id="chat-box"></div>
+        <div id="input-area">
+            <div id="input-wrapper">
+                <textarea id="user-input" rows="1" placeholder="Ask about the news..."></textarea>
+                <button id="send-btn" disabled><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let newsData = [];
+    const chatBox = document.getElementById("chat-box");
+    const userInput = document.getElementById("user-input");
+    const sendBtn = document.getElementById("send-btn");
+
+    async function loadNews() {
+        const res = await fetch("/news");
+        newsData = await res.json();
+        const list = document.getElementById("news-list");
+        if (!newsData.length) {
+            list.innerHTML = "<p style='color:#555;font-size:13px'>No news yet. Click Refresh.</p>";
+            return;
+        }
+        list.innerHTML = newsData.map((item, index) => `
+            <div class="news-card" onclick="askAbout(${index})">
+                <span class="category cat-${item.category}">${item.category}</span>
+                <div class="title">${item.title}</div>
+                <div class="translation">${item.translation}</div>
+                <div class="meta">${item.source} · <span class="importance-${item.importance}">${item.importance}</span></div>
+            </div>
+        `).join("");
+    }
+
+    function askAbout(index) {
+        if (newsData[index]) {
+            userInput.value = `Tell me more about: ${newsData[index].title}`;
+            sendBtn.disabled = false;
+            sendMessage();
+        }
+    }
+
+    function addMessage(role, text) {
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("message", role);
+        const avatar = document.createElement("div");
+        avatar.classList.add("msg-avatar");
+        avatar.innerHTML = role === "user" ? "A" : '<i class="fa-solid fa-bolt"></i>';
+        const content = document.createElement("div");
+        content.classList.add("msg-content");
+        if (role === "bot") { content.innerHTML = marked.parse(text); }
+        else { content.textContent = text; }
+        wrapper.appendChild(avatar);
+        wrapper.appendChild(content);
+        chatBox.appendChild(wrapper);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function addTyping() {
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("message", "bot");
+        wrapper.id = "typing";
+        wrapper.innerHTML = `<div class="msg-avatar"><i class="fa-solid fa-bolt"></i></div><div class="msg-content"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
+        chatBox.appendChild(wrapper);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function sendMessage() {
+        const msg = userInput.value.trim();
+        if (!msg) return;
+        addMessage("user", msg);
+        userInput.value = "";
+        userInput.style.height = "auto";
+        sendBtn.disabled = true;
+        addTyping();
+        try {
+            const res = await fetch("/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: msg })
+            });
+            const data = await res.json();
+            document.getElementById("typing")?.remove();
+            addMessage("bot", data.reply || "Error: " + data.error);
+        } catch {
+            document.getElementById("typing")?.remove();
+            addMessage("bot", "Connection error.");
+        }
+        sendBtn.disabled = false;
+        userInput.focus();
+    }
+
+    async function refreshNews() {
+        document.getElementById("news-list").innerHTML = "<p style='color:#555;font-size:13px'>Refreshing...</p>";
+        await fetch("/refresh-news", { method: "POST" });
+        await loadNews();
+        addMessage("bot", "✅ News refreshed! Ask me anything about the latest tech news.");
+    }
+
+    function clearChat() {
+        chatBox.innerHTML = "";
+        fetch("/clear", { method: "POST" });
+        addMessage("bot", "Hello! I'm your AI News Agent. Ask me about today's tech news! 🚀");
+    }
+
+    userInput.addEventListener("input", () => {
+        userInput.style.height = "auto";
+        userInput.style.height = userInput.scrollHeight + "px";
+        sendBtn.disabled = userInput.value.trim().length === 0;
+    });
+
+    sendBtn.addEventListener("click", sendMessage);
+    userInput.addEventListener("keydown", e => {
+        if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    });
+
+    window.onload = () => {
+        addMessage("bot", "Hello! I'm your AI News Agent. Ask me about today's tech news! 🚀");
+        loadNews();
+    };
+</script>
+</body>
+</html>
