@@ -2,81 +2,73 @@
 
 <div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge\&logo=python)
-![Flask](https://img.shields.io/badge/Flask-Web_App-black?style=for-the-badge\&logo=flask)
-![LangChain](https://img.shields.io/badge/LangChain-AI_Framework-green?style=for-the-badge)
-![Groq](https://img.shields.io/badge/Groq-LLM_API-orange?style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-Web_App-000000?style=for-the-badge&logo=flask)
+![LangChain](https://img.shields.io/badge/LangChain-AI_Framework-1C3C3C?style=for-the-badge)
+![Groq](https://img.shields.io/badge/Groq-LLM_API-FF6B00?style=for-the-badge)
 ![BeautifulSoup](https://img.shields.io/badge/BeautifulSoup-Web_Scraping-yellow?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-red?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 ### 🧠 AI-Powered Technology News Summarizer
 
-An intelligent automated system that fetches, analyzes, and summarizes the latest AI and technology news using modern Large Language Models (LLMs).
+A Python application designed to collect technology and AI news, process article content, and generate concise summaries using Large Language Models.
 
 </div>
 
 ---
 
-# 📌 Overview
+## 📌 Overview
 
-**AI News Agent** is a Python-based AI application designed to collect the latest technology and artificial intelligence news from multiple sources, process the content, and generate concise, structured summaries automatically.
+**AI News Agent** is a Python-based application that combines web scraping, content processing, and AI-powered summarization to help users explore technology and artificial intelligence news.
 
-The project combines:
-
-* Web scraping
-* Natural Language Processing (NLP)
-* AI summarization
-* Flask web development
-
-to deliver a modern AI-powered news experience.
+The application uses Python libraries to retrieve and parse web content, integrates with an LLM through the Groq API, and presents processed news through a Flask web interface.
 
 ---
 
-# ✨ Features
+## ✨ Features
 
-## 📰 Automated News Scraping
+### 📰 News Collection
+- Retrieves news content from configured sources.
+- Extracts article information from web pages.
+- Processes article titles and available content.
+- Organizes collected news for further processing.
 
-* Fetches the latest tech news automatically
-* Supports multiple news sources
-* Extracts titles, descriptions, images, and links
+### 🧠 AI Summarization
+- Generates concise article summaries using an LLM.
+- Helps identify important information.
+- Presents summaries in a readable format.
 
-## 🧠 AI Summarization
+### 🌐 Flask Web Interface
+- Web-based application interface.
+- Uses Flask templates to display content.
+- Organizes news information and summaries.
 
-* Generates AI-powered summaries using LLMs
-* Extracts key insights from articles
-* Produces clean and readable summaries
-
-## 🌐 Flask Web Interface
-
-* Responsive and lightweight UI
-* Built using Flask Templates
-* Organized article cards and summaries
-
-## ⚡ Python Backend Features
-
-* REST-friendly structure
-* Modular Python architecture
-* Easy integration with APIs
-* Environment variable support
+### ⚙️ Python Backend
+- HTTP requests and HTML parsing.
+- Environment variable configuration.
+- Modular code organization.
 
 ---
 
-# 🛠️ Python Libraries Used
+## 🛠️ Tech Stack
 
-| Library          | Purpose                   |
-| ---------------- | ------------------------- |
-| `Flask`          | Web framework             |
-| `requests`       | HTTP requests             |
-| `beautifulsoup4` | HTML parsing & scraping   |
-| `langchain`      | AI workflow orchestration |
-| `python-dotenv`  | Environment variables     |
-| `groq`           | LLM API integration       |
+| Technology | Purpose |
+|---|---|
+| Python | Core programming language |
+| Flask | Web application framework |
+| Requests | HTTP requests |
+| BeautifulSoup4 | HTML parsing and web scraping |
+| LangChain | AI workflow integration |
+| Groq API | Language model integration |
+| python-dotenv | Environment variable management |
 
 ---
 
-# 📦 Requirements
+## 📦 Requirements
 
-```txt id="nqg0gn"
+The main dependencies include:
+
+```text
 Flask
 requests
 beautifulsoup4
@@ -85,261 +77,139 @@ python-dotenv
 groq
 ```
 
-Install manually:
+Install the dependencies using:
 
-```bash id="k3vkza"
-pip install Flask requests beautifulsoup4 langchain python-dotenv groq
-```
-
----
-
-# 📂 Project Structure
-
-```bash id="m90njm"
-ai-news-agent/
-│
-├── app.py
-├── requirements.txt
-├── .env
-│
-├── scraper/
-│   ├── news_scraper.py
-│   ├── parser.py
-│   └── sources.py
-│
-├── summarizer/
-│   ├── ai_summary.py
-│   ├── prompts.py
-│   └── llm.py
-│
-├── templates/
-│   ├── index.html
-│   └── article.html
-│
-├── static/
-│   ├── css/
-│   ├── js/
-│   └── images/
-│
-└── README.md
-```
-
----
-
-# ⚙️ Installation & Setup
-
-## 1️⃣ Clone the Repository
-
-```bash id="pqj19u"
-git clone https://github.com/ahmadnazzal22/ai-news-agent.git
-
-cd ai-news-agent
-```
-
----
-
-## 2️⃣ Create Virtual Environment
-
-```bash id="jlwm94"
-python -m venv venv
-```
-
----
-
-## 3️⃣ Activate Environment
-
-### Windows
-
-```bash id="f7g0pk"
-venv\Scripts\activate
-```
-
-### macOS / Linux
-
-```bash id="5gwxzw"
-source venv/bin/activate
-```
-
----
-
-## 4️⃣ Install Dependencies
-
-```bash id="m0y8gw"
+```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-## 5️⃣ Configure Environment Variables
+## ⚙️ Installation & Setup
 
-Create a `.env` file:
+### 1. Clone the Repository
 
-```env id="txmb4n"
-GROQ_API_KEY=your_api_key
+```bash
+git clone https://github.com/ahmadnazzal22/ai-news-agent.git
+cd ai-news-agent
+```
+
+### 2. Create a Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+Activate it:
+
+**Windows**
+
+```bash
+venv\Scripts\activate
+```
+
+**macOS / Linux**
+
+```bash
+source venv/bin/activate
+```
+
+### 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+Get your API key from the [Groq Console](https://console.groq.com/).
+
+Keep your API key private. Do not upload your `.env` file to GitHub.
+
+### 5. Run the Application
+
+```bash
+python app.py
 ```
 
 ---
 
-## 6️⃣ Run the Flask Application
+## 🌐 Access the Application
 
-```bash id="oklmwm"
-python app.py
-```
+Open your browser and visit:
 
-Visit:
-
-```bash id="8dztw7"
+```text
 http://127.0.0.1:5000
 ```
 
 ---
 
-# 🧠 Example Python Code
+## 🧠 How It Works
 
-## Fetch News Articles
-
-```python id="jlwmg8"
-import requests
-from bs4 import BeautifulSoup
-
-url = "https://example.com"
-
-response = requests.get(url)
-
-soup = BeautifulSoup(response.text, "html.parser")
-
-titles = soup.find_all("h2")
-
-for title in titles:
-    print(title.text)
+```text
+       News Sources
+             ↓
+       Web Scraping
+             ↓
+     Article Extraction
+             ↓
+      Content Processing
+             ↓
+      Groq API + LLM
+             ↓
+     AI-Generated Summary
+             ↓
+       Flask Web Interface
 ```
 
 ---
 
-## AI Summarization Example
+## 🚀 Future Improvements
 
-```python id="h6nrqw"
-from groq import Groq
+Potential enhancements for future versions:
 
-client = Groq(api_key="YOUR_API_KEY")
-
-response = client.chat.completions.create(
-    model="llama3-70b-8192",
-    messages=[
-        {
-            "role": "user",
-            "content": "Summarize this article"
-        }
-    ]
-)
-
-print(response.choices[0].message.content)
-```
+- 📰 Additional news sources.
+- 🧠 News categorization.
+- 📊 Sentiment analysis.
+- 🔖 Article bookmarking.
+- 🔐 User authentication.
+- 🗄️ Database integration.
+- 🐳 Docker support.
+- ☁️ Cloud deployment.
 
 ---
 
-# 🧠 How It Works
+## 🤝 Contributing
 
-```mermaid id="zhp7c7"
-graph TD
+Contributions and suggestions are welcome.
 
-A[Scrape News Websites] --> B[Extract Article Content]
-B --> C[Process Text with Python]
-C --> D[Send to AI Model]
-D --> E[Generate Smart Summary]
-E --> F[Display in Flask UI]
-```
+To contribute:
 
----
-
-# 🚀 Future Improvements
-
-* ✅ AI sentiment analysis
-* ✅ News categorization
-* ✅ Real-time updates
-* ✅ User authentication
-* ✅ Bookmark articles
-* ✅ Dark mode
-* ✅ REST API support
-* ✅ PostgreSQL database integration
-* ✅ Docker deployment
+1. Fork the repository.
+2. Create a new branch.
+3. Make your changes.
+4. Commit your changes.
+5. Open a Pull Request.
 
 ---
 
-# 🐳 Docker Support
+## 👨‍💻 Developer
 
-## Dockerfile
+**Ahmad Nazzal**
 
-```dockerfile id="zswfkk"
-FROM python:3.11
+Python Developer | Exploring AI & Automation
 
-WORKDIR /app
-
-COPY . .
-
-RUN pip install -r requirements.txt
-
-CMD ["python", "app.py"]
-```
+- GitHub: [ahmadnazzal22](https://github.com/ahmadnazzal22)
+- Repository: [AI News Agent](https://github.com/ahmadnazzal22/ai-news-agent)
 
 ---
 
-# ☁️ Deployment
-
-## Deploy on Render / Railway / VPS
-
-### Run with Gunicorn
-
-```bash id="l14lxg"
-pip install gunicorn
-
-gunicorn app:app
-```
-
----
-
-# 🤝 Contributing
-
-Contributions are welcome!
-
-```bash id="xxa3ie"
-Fork → Clone → Create Branch → Commit → Pull Request
-```
-
----
-
-# 📄 License
+## 📄 License
 
 This project is licensed under the MIT License.
-
----
-
-# 👨‍💻 Developer
-
-<div align="center">
-
-## Ahmad Nazzal
-
-🐍 Python Developer
-🧠 AI Enthusiast
-⚡ Backend Engineer
-
-</div>
-
----
-
-# ⭐ Support
-
-If you like this project:
-
-🌟 Star the repository
-🍴 Fork the project
-📢 Share it with others
-
----
-
-<div align="center">
-
-### Built with Python, Flask & AI ❤️
-
-</div>
